@@ -1,0 +1,36 @@
+@import url("./reset.css");
+
+:root {
+  --red-color: rgba(240, 63, 59, 1);
+  --blue-color: rgba(9, 87, 195, 1);
+  --green-color: rgba(16, 57, 49, 1);
+  --white-color: rgba(251, 251, 251, 1);
+
+  --blue-hover: rgba(9, 87, 195, 0.2);
+  --green-hover: rgba(16, 57, 49, 0.2);
+  --red-hover: rgba(240, 63, 59, 0.2);
+}
+.container {
+  max-width: 1440px;
+  padding: 0 96px;
+  margin: 0 auto;
+}
+/* .container {
+  max-width: 320px;
+  padding: 20px;
+  margin: 0 auto;
+} */
+
+/* @media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 24px;
+  }
+} */
+
+/* @media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 32px;
+  }
+} */

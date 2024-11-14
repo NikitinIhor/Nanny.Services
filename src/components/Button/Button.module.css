@@ -1,0 +1,13 @@
+.container {
+  padding: 14px 40px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background-color: var(--red-color);
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.container:hover,
+.container:focus {
+  background-color: var(--red-hover);
+}
