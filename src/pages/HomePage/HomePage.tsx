@@ -1,10 +1,24 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
 import sprite from "../../images/sprite.svg";
 import css from "./HomePage.module.css";
 
-interface HomePageProps {}
+const HomePage: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [activeModal, setActiveModal] = useState<
+    "login" | "registration" | null
+  >(null);
 
-const HomePage: React.FC<HomePageProps> = () => {
+  const handleOpenModal = (type: "login" | "registration") => {
+    setOpenModal(true);
+    setActiveModal(type);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setActiveModal(null);
+  };
+
   return (
     <div className={css.wrapper}>
       <div className={css.container}>
@@ -37,8 +51,15 @@ const HomePage: React.FC<HomePageProps> = () => {
                 </ul>
               </nav>
               <div className={css.buttons}>
-                <button type="button">Log In</button>
-                <button type="button">Registration</button>
+                <button onClick={() => handleOpenModal("login")} type="button">
+                  Log In
+                </button>
+                <button
+                  onClick={() => handleOpenModal("registration")}
+                  type="button"
+                >
+                  Registration
+                </button>
               </div>
             </header>
             <div className={css.right_body}>
@@ -55,6 +76,12 @@ const HomePage: React.FC<HomePageProps> = () => {
           </div>
         </div>
       </div>
+      <ModalWrapper
+        login={activeModal === "login"}
+        registration={activeModal === "registration"}
+        isOpen={openModal}
+        onRequestClose={handleCloseModal}
+      />
     </div>
   );
 };
