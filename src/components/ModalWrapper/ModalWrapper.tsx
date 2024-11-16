@@ -1,35 +1,33 @@
+import { ReactNode } from "react";
 import Modal from "react-modal";
-import Login from "../Login/Login";
-import Registration from "../Registration/Registration";
 import css from "./ModalWrapper.module.css";
 Modal.setAppElement("#root");
 
 interface ModalWrapperProps {
   onRequestClose: () => void;
+  handleCloseModal: () => void;
   isOpen: boolean;
-  login: boolean;
-  registration: boolean;
+  children: ReactNode;
 }
 
 const customStyles = {
   content: {
     width: "586px",
-    borderRadius: "10px",
+    borderRadius: "30px",
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    padding: "12px",
+    padding: "64px",
   },
 };
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   onRequestClose,
   isOpen,
-  login,
-  registration,
+  children,
 }) => {
   return (
     <Modal
@@ -38,8 +36,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
       style={customStyles}
       overlayClassName={css.overlay}
     >
-      {login && <Login />}
-      {registration && <Registration />}
+      {children}
     </Modal>
   );
 };

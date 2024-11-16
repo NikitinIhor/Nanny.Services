@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import AuthForm from "../../components/AuthForm/AuthForm";
 import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
 import sprite from "../../images/sprite.svg";
 import css from "./HomePage.module.css";
@@ -77,11 +78,17 @@ const HomePage: React.FC = () => {
         </div>
       </div>
       <ModalWrapper
-        login={activeModal === "login"}
-        registration={activeModal === "registration"}
         isOpen={openModal}
         onRequestClose={handleCloseModal}
-      />
+        handleCloseModal={handleCloseModal}
+      >
+        {activeModal === "login" && (
+          <AuthForm login handleCloseModal={handleCloseModal} />
+        )}
+        {activeModal === "registration" && (
+          <AuthForm registration handleCloseModal={handleCloseModal} />
+        )}
+      </ModalWrapper>
     </div>
   );
 };

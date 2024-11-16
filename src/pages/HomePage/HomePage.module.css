@@ -61,8 +61,14 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 420px;
+  height: 100vh;
+  width: 100%;
   position: relative;
+}
+@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .right {
+    background-image: url("../../images/main@2x.jpg");
+  }
 }
 header {
   display: flex;
