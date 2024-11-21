@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Modal from "react-modal";
 import css from "./ModalWrapper.module.css";
 Modal.setAppElement("#root");
@@ -10,9 +10,8 @@ interface ModalWrapperProps {
   children: ReactNode;
 }
 
-const customStyles = {
+const baseStyles = {
   content: {
-    width: "586px",
     borderRadius: "30px",
     top: "50%",
     left: "50%",
@@ -20,8 +19,23 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    padding: "64px",
   },
+};
+
+const responsiveStyles = () => {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth < 768) {
+    return {
+      width: "280px",
+      padding: "15px",
+    };
+  } else {
+    return {
+      width: "586px",
+      padding: "64px",
+    };
+  }
 };
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
@@ -29,6 +43,24 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   children,
 }) => {
+  const [customStyles, setCustomStyles] = useState({
+    content: { ...baseStyles.content, ...responsiveStyles() },
+  });
+
+  useEffect(() => {
+    const madalWidth = () => {
+      setCustomStyles({
+        content: { ...baseStyles.content, ...responsiveStyles() },
+      });
+    };
+
+    window.addEventListener("resize", madalWidth);
+
+    madalWidth();
+
+    return () => window.removeEventListener("resize", madalWidth);
+  }, []);
+
   return (
     <Modal
       isOpen={isOpen}

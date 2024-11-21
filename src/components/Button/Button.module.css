@@ -1,13 +1,23 @@
 .container {
-  padding: 14px 40px;
+  padding: 5px 15px;
   transition: all 0.4s ease;
   cursor: pointer;
   background-color: var(--red-color);
   border-radius: 30px;
+  border: 1px solid var(--white-color);
   font-size: 16px;
+  color: var(--white-color);
+  width: 100px;
 }
 
 .container:hover,
 .container:focus {
-  background-color: var(--red-hover);
+  background-color: rgb(242, 89, 89);
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 14px 40px;
+    width: 100%;
+  }
 }

@@ -7,9 +7,9 @@ interface NotFoundPageProps {}
 const NotFoundPage: React.FC<NotFoundPageProps> = () => {
   return (
     <div className={css.container}>
-      <img src={image} alt="not foun page" />
+      <img src={image} alt="not found page" />
       <button className={css.btn}>
-        <Link to="/" />
+        <Link to="/">return Home</Link>
       </button>
     </div>
   );

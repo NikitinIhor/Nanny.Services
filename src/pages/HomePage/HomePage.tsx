@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
             </div>
           </div>
           <div className={css.right}>
-            <header>
+            <header className={css.homePage_header}>
               <nav>
                 <ul className={css.list}>
                   <li className={css.link}>
