@@ -42,7 +42,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
   };
 
   const handleSubmit = (
-    values: typeof initialValues,
+    // values: typeof initialValues,
+    _: typeof initialValues,
     actions: FormikHelpers<typeof initialValues>
   ) => {
     actions.resetForm();
