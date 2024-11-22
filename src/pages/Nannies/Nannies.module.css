@@ -1,0 +1,13 @@
+main {
+  background: rgba(243, 243, 243, 1);
+}
+.container {
+  padding-top: 64px;
+}
+.empty {
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  color: var(--red-color);
+}

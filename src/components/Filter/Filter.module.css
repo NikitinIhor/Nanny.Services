@@ -1,0 +1,59 @@
+.title {
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(138, 138, 137, 1);
+  margin-bottom: 8px;
+}
+.filter {
+  background-color: var(--red-color);
+  padding: 14px 18px;
+  width: 226px;
+  border-radius: 14px;
+  position: relative;
+  margin-bottom: 32px;
+}
+.filter_name {
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 18px;
+}
+.arrow {
+  border: none;
+  position: absolute;
+  top: 14px;
+  right: -14px;
+}
+.open {
+  fill: red;
+}
+.filter_wrapper {
+  position: relative;
+}
+.list {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  margin-top: -24px;
+  background-color: var(--white-color);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 226px;
+  transition: visibility 0s 0.3s, opacity 0.3s ease;
+}
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s 0s, opacity 0.3s ease;
+}
+
+.item button {
+  border: none;
+  font-size: 18px;
+  color: rgba(17, 16, 28, 0.3);
+}
+.item button.selected {
+  color: rgba(17, 16, 28, 1);
+}
