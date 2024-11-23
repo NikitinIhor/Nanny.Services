@@ -8,7 +8,9 @@ export const getAllGallery = createAsyncThunk(
       const res = await axios.get(
         "https://nannyservices-9f324-default-rtdb.europe-west1.firebasedatabase.app/babysitters.json"
       );
-      return res.data;
+      const limit = res.data.length;
+
+      return { limit, data: res.data };
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }

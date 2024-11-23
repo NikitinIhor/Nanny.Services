@@ -8,8 +8,10 @@ import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
 import { getAllGallery } from "../../redux/galleryOps";
 import {
+  loadMoreItems,
   selectError,
   selectGallery,
+  selectLimit,
   selectLoading,
 } from "../../redux/gallerySlise";
 import { AppDispatch } from "../../redux/store";
@@ -22,6 +24,7 @@ const Nannies: React.FC<NanniesProps> = () => {
   const gallery = useSelector(selectGallery);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const limit = useSelector(selectLimit);
 
   useEffect(() => {
     dispatch(getAllGallery());
@@ -29,6 +32,10 @@ const Nannies: React.FC<NanniesProps> = () => {
 
   if (loading) return <Loader />;
   if (error) return <Error />;
+
+  const handleLoadMore = () => {
+    dispatch(loadMoreItems());
+  };
 
   return (
     <div>
@@ -39,11 +46,19 @@ const Nannies: React.FC<NanniesProps> = () => {
           {gallery.length === 0 ? (
             <p className={css.empty}>-- The gallery is empty --</p>
           ) : (
-            gallery.map((el, index) => (
-              <GalleryItem item={el} key={el.id || index} />
-            ))
+            <ul className={css.list}>
+              {gallery.map((el, index) => (
+                <GalleryItem item={el} key={el.id || index} />
+              ))}
+            </ul>
           )}
-          <Button>Download more</Button>
+          {gallery.length < limit ? (
+            <div onClick={handleLoadMore} className={css.loadmore}>
+              <Button>Load more</Button>
+            </div>
+          ) : (
+            <p className={css.nomore}>-- No more to download....</p>
+          )}
         </div>
       </main>
     </div>

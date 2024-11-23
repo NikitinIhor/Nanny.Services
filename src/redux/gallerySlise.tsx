@@ -4,38 +4,59 @@ import { store } from "./store";
 
 export type RootState = ReturnType<typeof store.getState>;
 
+interface Review {
+  reviewer: string;
+  rating: number;
+  comment: string;
+}
+
 interface GalleryItem {
   id: string;
   name: string;
   avatar_url: string;
+  location: string;
+  rating: number;
+  price_per_hour: number;
   birthday: string;
   experience: string;
-  reviews: Array<{ reviewer: string; rating: number; comment: string }>;
-  education: string;
   kids_age: string;
-  price_per_hour: number;
-  location: string;
-  about: string;
   characters: string[];
-  rating: number;
+  education: string;
+  about: string;
+  reviews: Review[];
 }
 
 interface GalleryState {
   galleryArr: GalleryItem[];
+  displayedItems: GalleryItem[];
   loading: boolean;
   error: boolean;
+  itemsToDisplay: number;
+  limit: number;
 }
 
 const initialState: GalleryState = {
   galleryArr: [],
+  displayedItems: [],
   loading: false,
   error: false,
+  itemsToDisplay: 3,
+  limit: 0,
 };
 
 const gallerySlice = createSlice({
   name: "gallery",
   initialState,
-  reducers: {},
+  reducers: {
+    loadMoreItems: (state) => {
+      const nextItems = state.galleryArr.slice(
+        state.itemsToDisplay,
+        state.itemsToDisplay + 3
+      );
+      state.displayedItems = [...state.displayedItems, ...nextItems];
+      state.itemsToDisplay += 3;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -45,9 +66,14 @@ const gallerySlice = createSlice({
       })
       .addCase(
         getAllGallery.fulfilled,
-        (state, action: PayloadAction<GalleryItem[]>) => {
+        (
+          state,
+          action: PayloadAction<{ limit: number; data: GalleryItem[] }>
+        ) => {
           state.loading = false;
-          state.galleryArr = action.payload;
+          state.galleryArr = action.payload.data;
+          state.displayedItems = action.payload.data.slice(0, 3);
+          state.limit = action.payload.limit;
           state.error = false;
         }
       )
@@ -58,8 +84,11 @@ const gallerySlice = createSlice({
   },
 });
 
+export const { loadMoreItems } = gallerySlice.actions;
+
 export const selectLoading = (state: RootState) => state.gallery.loading;
 export const selectError = (state: RootState) => state.gallery.error;
-export const selectGallery = (state: RootState) => state.gallery.galleryArr;
+export const selectGallery = (state: RootState) => state.gallery.displayedItems;
+export const selectLimit = (state: RootState) => state.gallery.limit;
 
 export default gallerySlice.reducer;

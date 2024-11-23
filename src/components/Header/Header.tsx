@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <Link to="/nannies">Nannies</Link>
               </li>
               <li className={css.item}>
-                <Link className={css.link} to="/avorites">
+                <Link className={css.link} to="/favorites">
                   Favorites
                 </Link>
               </li>

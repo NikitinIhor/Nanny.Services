@@ -20,8 +20,9 @@
 .arrow {
   border: none;
   position: absolute;
-  top: 14px;
-  right: -14px;
+  top: 5px;
+  right: -25px;
+  padding: 10px;
 }
 .open {
   fill: red;
@@ -42,6 +43,7 @@
   gap: 12px;
   width: 226px;
   transition: visibility 0s 0.3s, opacity 0.3s ease;
+  z-index: 100;
 }
 .show {
   visibility: visible;
@@ -53,7 +55,17 @@
   border: none;
   font-size: 18px;
   color: rgba(17, 16, 28, 0.3);
+  width: 100%;
+  display: flex;
+  align-items: start;
 }
 .item button.selected {
   color: rgba(17, 16, 28, 1);
+}
+.item {
+  transition: all 0.4s ease;
+}
+.item:hover {
+  background-color: rgb(231, 230, 230);
+  border-radius: 12px;
 }
