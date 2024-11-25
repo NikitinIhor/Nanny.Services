@@ -65,96 +65,86 @@ const ContactForm: React.FC<ContactFormProps> = () => {
   };
 
   return (
-    <div className={css.wrapper}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={FeedbackSchema}
-      >
-        <Form className={css.form}>
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="text"
-              name="address"
-              placeholder="Address"
-            />
-            <ErrorMessage
-              className={css.error}
-              name="address"
-              component="span"
-            />
-          </div>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={FeedbackSchema}
+    >
+      <Form className={css.form}>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="text"
+            name="address"
+            placeholder="Address"
+          />
+          <ErrorMessage className={css.error} name="address" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="text"
-              name="phone"
-              placeholder="+380"
-            />
-            <ErrorMessage className={css.error} name="phone" component="span" />
-          </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="text"
+            name="phone"
+            placeholder="+380"
+          />
+          <ErrorMessage className={css.error} name="phone" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="number"
-              name="age"
-              placeholder="Child's age"
-            />
-            <ErrorMessage className={css.error} name="age" component="span" />
-          </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="number"
+            name="age"
+            placeholder="Child's age"
+          />
+          <ErrorMessage className={css.error} name="age" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="text"
-              name="time"
-              placeholder="00:00"
-            />
-            <ErrorMessage className={css.error} name="time" component="span" />
-          </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="text"
+            name="time"
+            placeholder="00:00"
+          />
+          <ErrorMessage className={css.error} name="time" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-            <ErrorMessage className={css.error} name="email" component="span" />
-          </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <ErrorMessage className={css.error} name="email" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              type="string"
-              name="name"
-              placeholder="Father's or mother's name"
-            />
-            <ErrorMessage className={css.error} name="name" component="span" />
-          </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            type="string"
+            name="name"
+            placeholder="Father's or mother's name"
+          />
+          <ErrorMessage className={css.error} name="name" component="span" />
+        </div>
 
-          <div className={css.container}>
-            <Field
-              className={css.field}
-              as="textarea"
-              name="comment"
-              placeholder="Comment"
-            />
-            <ErrorMessage
-              className={css.error}
-              name="comment"
-              component="span"
-            />
-          </div>
-          <div className={css.btn}>
-            <button className={css.btn}>Send</button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+        <div className={css.container}>
+          <Field
+            className={css.field}
+            as="textarea"
+            name="comment"
+            placeholder="Comment"
+          />
+          <ErrorMessage className={css.error} name="comment" component="span" />
+        </div>
+        <div className={css.btn}>
+          <button className={css.btn}>Send</button>
+        </div>
+      </Form>
+    </Formik>
   );
 };
 
