@@ -1,8 +1,14 @@
+.wrapper {
+  max-width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin: 20px;
+}
 .form {
   display: grid;
   row-gap: 16px;
   column-gap: 8px;
-  grid-template-columns: repeat(2, 1fr);
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -54,4 +60,14 @@
 .btn:hover,
 .btn:focus {
   background-color: rgb(242, 89, 89);
+}
+@media (min-width: 768px) {
+  .form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form .container:nth-child(5),
+  .form .container:nth-child(6),
+  .form .container:nth-child(7) {
+    grid-column: span 2;
+  }
 }
