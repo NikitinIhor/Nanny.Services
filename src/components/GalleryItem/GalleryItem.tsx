@@ -162,7 +162,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ item }) => {
           onRequestClose={handleCloseModal}
           handleCloseModal={handleCloseModal}
         >
-          <AppointmentForm handleCloseModal={handleCloseModal} />
+          <AppointmentForm item={item} handleCloseModal={handleCloseModal} />
         </ModalWrapper>
       </div>
     </li>

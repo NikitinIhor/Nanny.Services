@@ -1,0 +1,42 @@
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  color: #11101c;
+  letter-spacing: -2%;
+  margin-bottom: 20px;
+}
+.text {
+  margin-bottom: 40px;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  padding: 10px;
+}
+.image {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.image img {
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+}
+.info p:first-child {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.info p:nth-child(2) {
+  font-weight: 500px;
+  color: #11101c;
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: 40px;
+  }
+}
