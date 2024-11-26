@@ -1,5 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
+import sprite from "../../images/sprite.svg";
 import css from "./ContactForm.module.css";
 
 interface ContactFormProps {}
@@ -39,12 +41,6 @@ const FeedbackSchema = Yup.object().shape({
     .min(18, "Age must be at least 18!")
     .max(99, "Age must be less than 99!")
     .required("Age is required!"),
-  time: Yup.string()
-    .matches(
-      /^([0-9]{1,2}):([0-9]{2})\s?(AM|PM)?$/i,
-      "Must be a valid time (e.g., 10:30 AM)!"
-    )
-    .required("Time is required!"),
   email: Yup.string()
     .email("Must be a valid email!")
     .required("email is required!"),
@@ -58,7 +54,21 @@ const FeedbackSchema = Yup.object().shape({
     .required("comment is required!"),
 });
 
+const meetingList = ["09 : 00", "09 : 30", "10 : 00", "10 : 30"];
+
 const ContactForm: React.FC<ContactFormProps> = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("00 : 00");
+
+  const handleChangeValue = (newValue: string) => {
+    setValue(newValue);
+    setIsOpen(false);
+  };
+
+  const handleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   const handleSubmit = (_: formValues, actions: any) => {
     // _ ===values
     actions.resetForm();
@@ -102,13 +112,24 @@ const ContactForm: React.FC<ContactFormProps> = () => {
         </div>
 
         <div className={css.container}>
-          <Field
-            className={css.field}
-            type="text"
-            name="time"
-            placeholder="00:00"
-          />
-          <ErrorMessage className={css.error} name="time" component="span" />
+          <Field className={css.field} type="text" name="time" value={value} />
+          <button onClick={handleOpen} className={css.clock_btn} type="button">
+            <svg className={css.icon_clock} width={20} height={20}>
+              <use href={`${sprite}#icon-clock`}></use>
+            </svg>
+          </button>
+          <div className={`${css.meeting} ${isOpen ? css.isOpen : ""}`}>
+            <p>Meeting time</p>
+            <ul className={css.list}>
+              {meetingList.map((el, index) => (
+                <li className={css.item} key={index}>
+                  <button onClick={() => handleChangeValue(el)} type="button">
+                    {el}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className={css.container}>

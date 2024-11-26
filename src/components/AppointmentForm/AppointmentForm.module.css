@@ -1,4 +1,5 @@
 .title {
+  padding-top: 20px;
   font-weight: 500;
   font-size: 18px;
   color: #11101c;
@@ -11,8 +12,8 @@
 }
 .close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  right: 0;
   border: none;
   padding: 10px;
 }
@@ -38,11 +39,16 @@
 }
 @media (min-width: 768px) {
   .title {
+    padding-top: 0;
     font-size: 40px;
     margin-bottom: 20px;
   }
   .text {
     font-size: 16px;
     margin-bottom: 40px;
+  }
+  .close {
+    top: 20px;
+    right: 20px;
   }
 }
