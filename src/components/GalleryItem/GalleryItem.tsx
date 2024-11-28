@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import sprite from "../../images/sprite.svg";
+import { addToFavouriteArr } from "../../redux/gallerySlise";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 import Button from "../Button/Button";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
@@ -13,7 +15,7 @@ interface Review {
 
 interface GalleryItemProps {
   item: {
-    id: string;
+    index: number;
     name: string;
     avatar_url: string;
     location: string;
@@ -35,10 +37,15 @@ const getAge = (age: string) => {
 };
 
 const GalleryItem: React.FC<GalleryItemProps> = ({ item }) => {
+  const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(false);
   const [open, setOpen] = useState(false);
-
   const [openModal, setOpenModal] = useState(false);
+
+  const handleAddtoFavoriteGallery = (name: string) => {
+    setFavorite((prev) => !prev);
+    dispatch(addToFavouriteArr(name));
+  };
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -49,10 +56,6 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ item }) => {
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
-  };
-
-  const handleFavorite = () => {
-    setFavorite((prev) => !prev);
   };
 
   return (
@@ -86,7 +89,10 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ item }) => {
             <div className={css.price}>
               Price / 1 hour:<span>{item.price_per_hour}$</span>
             </div>
-            <button onClick={handleFavorite} className={css.header_btn}>
+            <button
+              onClick={() => handleAddtoFavoriteGallery(item.name)}
+              className={css.header_btn}
+            >
               <svg
                 className={`${css.heart} ${favorite ? css.isFavorite : ""}`}
                 width={26}

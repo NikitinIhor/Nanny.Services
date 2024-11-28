@@ -11,7 +11,7 @@ interface Review {
 }
 
 interface GalleryItem {
-  id: string;
+  index: number;
   name: string;
   avatar_url: string;
   location: string;
@@ -28,6 +28,7 @@ interface GalleryItem {
 
 interface GalleryState {
   galleryArr: GalleryItem[];
+  favouriteArr: GalleryItem[];
   displayedItems: GalleryItem[];
   loading: boolean;
   error: boolean;
@@ -37,6 +38,7 @@ interface GalleryState {
 
 const initialState: GalleryState = {
   galleryArr: [],
+  favouriteArr: [],
   displayedItems: [],
   loading: false,
   error: false,
@@ -55,6 +57,21 @@ const gallerySlice = createSlice({
       );
       state.displayedItems = [...state.displayedItems, ...nextItems];
       state.itemsToDisplay += 3;
+    },
+    addToFavouriteArr: (state, action: PayloadAction<string>) => {
+      const itemToAdd = state.galleryArr.find(
+        (el) => el.name === action.payload
+      );
+
+      if (itemToAdd) {
+        const isAddedItem = state.favouriteArr.some(
+          (el) => el.name === itemToAdd.name
+        );
+
+        if (!isAddedItem) {
+          state.favouriteArr.push(itemToAdd);
+        }
+      }
     },
   },
 
@@ -84,11 +101,13 @@ const gallerySlice = createSlice({
   },
 });
 
-export const { loadMoreItems } = gallerySlice.actions;
+export const { loadMoreItems, addToFavouriteArr } = gallerySlice.actions;
 
 export const selectLoading = (state: RootState) => state.gallery.loading;
 export const selectError = (state: RootState) => state.gallery.error;
 export const selectGallery = (state: RootState) => state.gallery.displayedItems;
 export const selectLimit = (state: RootState) => state.gallery.limit;
+export const selectFavouriteArr = (state: RootState) =>
+  state.gallery.favouriteArr;
 
 export default gallerySlice.reducer;

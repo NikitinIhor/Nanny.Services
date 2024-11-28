@@ -1,1 +1,4 @@
-declare module "modern-normalize";
+declare module "modern-normalize" {
+  const content: string;
+  export default content;
+}

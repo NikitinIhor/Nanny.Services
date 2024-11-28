@@ -47,8 +47,8 @@ const Nannies: React.FC<NanniesProps> = () => {
             <p className={css.empty}>-- The gallery is empty --</p>
           ) : (
             <ul className={css.list}>
-              {gallery.map((el, index) => (
-                <GalleryItem item={el} key={el.id || index} />
+              {gallery.map((item, index) => (
+                <GalleryItem item={item} key={index} />
               ))}
             </ul>
           )}

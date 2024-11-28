@@ -1,6 +1,13 @@
 main {
   background: rgba(243, 243, 243, 1);
 }
+
 .container {
   padding-top: 64px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 64px;
 }

@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+Nanny.Services
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nanny.Services is a web application designed to help parents find the perfect nanny for their children. The platform allows users to register, log in, and filter available nannies based on specific criteria. The app supports real-time communication and easy contact submission via a form for detailed requests. Whether you're looking for a nanny who is highly rated, available at specific times, or offers services under a certain price range, Nanny.Services makes it simple to connect with the right caregivers.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+User Authentication: Register and log in securely using Firebase authentication.
+Nanny Search: Filter nannies based on various criteria:
+A to Z sorting
+Z to A sorting
+Price range: Less than $10 and Greater than $10
+Popularity: Show popular and not popular nannies
+Show all available nannies
+Nanny Form: Fill out a detailed contact form to inquire about nannies, including:
+Name
+Email
+Address
+Phone number
+Child’s age and meeting time
+Comments and special requests
+Redux for State Management: The app uses Redux to manage global state and authentication.
+Formik & Yup: The app uses Formik for managing form state and Yup for validation.
+Technologies
+Frontend:
 
-## Expanding the ESLint configuration
+React
+Redux
+Firebase Authentication
+Formik (for form handling)
+Yup (for form validation)
+CSS Modules for styling
+Backend:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Firebase Firestore (for storing user data and nanny details)
+State Management:
 
-- Configure the top-level `parserOptions` property like this:
+Redux for handling application state
+Installation
+Clone the Repository
+bash
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+git clone https://github.com/NikitinIhor/Nanny.Services
+Install Dependencies
+Navigate to the project folder:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+bash
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+cd nanny.services
+Install dependencies using npm or yarn:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+bash
+
+npm install
+
+# or
+
+yarn install
+Firebase Setup
+Create a project in Firebase Console (https://console.firebase.google.com/).
+Set up Firebase Authentication and Firestore.
+Add Firebase configuration to your app by creating a firebaseConfig.ts file.

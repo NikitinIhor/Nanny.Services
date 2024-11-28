@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import sprite from "../../images/sprite.svg";
 import Button from "../Button/Button";
 import css from "./Header.module.css";
@@ -20,13 +20,25 @@ const Header: React.FC<HeaderProps> = () => {
                   Home
                 </Link>
               </li>
-              <li className={`${css.item} isActive`}>
-                <Link to="/nannies">Nannies</Link>
+              <li className={css.item}>
+                <NavLink
+                  to="/nannies"
+                  className={({ isActive }) =>
+                    `${css.link} ${isActive ? "isActive" : ""}`
+                  }
+                >
+                  Nannies
+                </NavLink>
               </li>
               <li className={css.item}>
-                <Link className={css.link} to="/favorites">
+                <NavLink
+                  to="/favorites"
+                  className={({ isActive }) =>
+                    `${css.link} ${isActive ? "isActive" : ""}`
+                  }
+                >
                   Favorites
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>

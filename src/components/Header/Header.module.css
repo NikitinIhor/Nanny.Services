@@ -18,12 +18,7 @@
   display: flex;
   gap: 40px;
 }
-.link {
-  transition: all 0.4s ease;
-}
-.link:hover {
-  text-decoration: underline;
-}
+
 .contact {
   display: flex;
   align-items: center;
