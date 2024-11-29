@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAllGallery } from "./galleryOps";
-import { store } from "./store";
+import { getAllGallery } from "../gallery/galleryOps";
+import { store } from "../store";
 
 export type RootState = ReturnType<typeof store.getState>;
 

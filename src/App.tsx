@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -13,6 +14,7 @@ interface AppProps {}
 const App: React.FC<AppProps> = () => {
   return (
     <>
+      <Toaster />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />

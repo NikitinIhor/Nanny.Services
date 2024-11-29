@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import sprite from "../../images/sprite.svg";
-import { addToFavouriteArr } from "../../redux/gallerySlise";
+import { addToFavouriteArr } from "../../redux/gallery/gallerySlise";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 import Button from "../Button/Button";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";

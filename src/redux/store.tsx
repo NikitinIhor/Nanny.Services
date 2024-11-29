@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
-import galleryReducer from "./gallerySlise";
+import authReducer from "./auth/authSlice";
+import galleryReducer from "./gallery/gallerySlise";
 
 const persistConfig = {
   key: "root",
@@ -14,11 +15,13 @@ const persistedReducer = persistReducer(persistConfig, galleryReducer);
 export const store = configureStore({
   reducer: {
     gallery: persistedReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST"],
+        ignoredPaths: ["auth.error"],
       },
     }),
 });

@@ -6,14 +6,14 @@ import Filter from "../../components/Filter/Filter";
 import GalleryItem from "../../components/GalleryItem/GalleryItem";
 import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
-import { getAllGallery } from "../../redux/galleryOps";
+import { getAllGallery } from "../../redux/gallery/galleryOps";
 import {
   loadMoreItems,
   selectError,
   selectGallery,
   selectLimit,
   selectLoading,
-} from "../../redux/gallerySlise";
+} from "../../redux/gallery/gallerySlise";
 import { AppDispatch } from "../../redux/store";
 import css from "./Nannies.module.css";
 

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Filter from "../../components/Filter/Filter";
 import GalleryItem from "../../components/GalleryItem/GalleryItem";
 import Header from "../../components/Header/Header";
-import { selectFavouriteArr } from "../../redux/gallerySlise";
+import { selectFavouriteArr } from "../../redux/gallery/gallerySlise";
 import css from "./Favorites.module.css";
 
 interface FavoritesProps {}
