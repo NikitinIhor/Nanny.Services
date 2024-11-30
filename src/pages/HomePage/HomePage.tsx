@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
@@ -6,10 +6,18 @@ import sprite from "../../images/sprite.svg";
 import css from "./HomePage.module.css";
 
 const HomePage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [activeModal, setActiveModal] = useState<
     "login" | "registration" | null
   >(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenModal = (type: "login" | "registration") => {
     setOpenModal(true);
@@ -21,7 +29,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={`${css.wrapper} ${isVisible ? css.visible : ""}`}>
       <div className={css.container}>
         <div className={css.body}>
           <div className={css.left}>
@@ -31,12 +39,14 @@ const HomePage: React.FC = () => {
             <div className={css.content}>
               <h1>Make Life Easier for the Family:</h1>
               <p>Find Babysitters Online for All Occasions</p>
-              <button className={css.btn} type="button">
-                Get started
-                <svg className={css.icon} width={18} height={18}>
-                  <use href={`${sprite}#icon-arrow`}></use>
-                </svg>
-              </button>
+              <Link to="/nannies">
+                <button className={css.btn} type="button">
+                  Get started
+                  <svg className={css.icon} width={18} height={18}>
+                    <use href={`${sprite}#icon-arrow`}></use>
+                  </svg>
+                </button>
+              </Link>
             </div>
           </div>
           <div className={css.right}>

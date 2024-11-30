@@ -1,0 +1,90 @@
+.container {
+  background-image: url("../../images/main.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.wrapper {
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes underlineLeft {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 35%;
+  }
+}
+@keyframes underlineRight {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 35%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapper span {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.wrapper span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.wrapper span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.wrapper span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.wrapper span:nth-child(4) {
+  animation-delay: 1.1s;
+}
+
+.wrapper span:nth-child(5) {
+  animation-delay: 1.4s;
+}
+
+.wrapper span:nth-child(7) {
+  animation-delay: 1.6s;
+}
+
+.wrapper span:nth-child(8) {
+  animation-delay: 1.3s;
+}
+
+.wrapper span:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+.wrapper span:nth-child(10) {
+  animation-delay: 0.4s;
+}
+
+.wrapper span:nth-child(11) {
+  animation-delay: 0.7s;
+}
+.wrapper span:nth-child(6) {
+  animation-delay: 2.2s;
+}
