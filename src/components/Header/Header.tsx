@@ -1,11 +1,28 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import sprite from "../../images/sprite.svg";
+import { selectIsAuthenticated, selectUser } from "../../redux/auth/authSlice";
 import Button from "../Button/Button";
+import Logout from "../Logout/Logout";
+import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import css from "./Header.module.css";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const user = useSelector(selectUser);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <header className={css.header}>
       <div className="big_container">
@@ -42,17 +59,28 @@ const Header: React.FC<HeaderProps> = () => {
               </li>
             </ul>
           </nav>
-          <div className={css.contact}>
-            <div className={css.user}>
-              <div className={css.user_wrapper}>
-                <svg className={css.user_icon} width={16} height={16}>
-                  <use href={`${sprite}#icon-user`}></use>
-                </svg>
+          {isAuthenticated && user && (
+            <div className={css.contact}>
+              <div className={css.user}>
+                <div className={css.user_wrapper}>
+                  <svg className={css.user_icon} width={16} height={16}>
+                    <use href={`${sprite}#icon-user`}></use>
+                  </svg>
+                </div>
+                <span>{user?.name || "Anonymous"}</span>
               </div>
-              <span>Ilona</span>
+              <div onClick={handleOpenModal}>
+                <Button>Log out</Button>
+              </div>
             </div>
-            <Button>Log out</Button>
-          </div>
+          )}
+          <ModalWrapper
+            isOpen={openModal}
+            onRequestClose={handleCloseModal}
+            handleCloseModal={handleCloseModal}
+          >
+            <Logout handleCloseModal={handleCloseModal} />
+          </ModalWrapper>
         </div>
       </div>
     </header>

@@ -7,6 +7,7 @@ export type RootState = ReturnType<typeof store.getState>;
 interface User {
   email: string | null;
   uid: string;
+  name?: string;
 }
 
 interface AuthState {
@@ -38,7 +39,11 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = false;
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.user = {
+          email: action.payload.email,
+          uid: action.payload.uid,
+          name: action.payload.name || "Anonymous",
+        };
       })
       .addCase(registerUser.rejected, (state) => {
         state.loading = false;
@@ -65,6 +70,7 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state, action: PayloadAction<null>) => {
         state.loading = false;
         state.error = false;
+        state.isAuthenticated = false;
         state.user = action.payload;
       })
       .addCase(logoutUser.rejected, (state) => {
@@ -79,5 +85,7 @@ export const selectLoading = (state: RootState) => state.auth.loading;
 export const selectError = (state: RootState) => state.auth.error;
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
+
+export const selectUser = (state: RootState) => state.auth.user;
 
 export default authSlice.reducer;

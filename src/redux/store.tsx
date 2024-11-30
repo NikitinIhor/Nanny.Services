@@ -8,6 +8,7 @@ import galleryReducer from "./gallery/gallerySlise";
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["gallery", "auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, galleryReducer);

@@ -61,7 +61,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 300px;
+  height: 340px;
   width: 100%;
   position: relative;
 }
@@ -186,7 +186,7 @@
   }
   .right {
     flex: 1;
-    height: 736px;
+    height: 750px;
   }
   .homePage_header {
     flex-direction: row;

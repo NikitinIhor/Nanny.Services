@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
   UserCredential,
 } from "firebase/auth";
 
@@ -11,7 +12,11 @@ import { auth } from "./firebaseConfig";
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (
-    { email, password }: { email: string; password: string },
+    {
+      email,
+      password,
+      name,
+    }: { email: string; password: string; name: string },
     thunkAPI
   ) => {
     try {
@@ -20,7 +25,12 @@ export const registerUser = createAsyncThunk(
       const user = {
         email: userCredential.user.email,
         uid: userCredential.user.uid,
+        name,
       };
+
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
 
       return user;
     } catch (error: any) {

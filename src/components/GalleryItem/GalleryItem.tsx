@@ -154,7 +154,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ item }) => {
                     </div>
                   </div>
                 </div>
-                <p>{el.comment}</p>
+                <p className={css.comment}>{el.comment}</p>
               </li>
             ))}
           </ul>

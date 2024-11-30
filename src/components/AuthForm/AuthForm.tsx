@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast/headless";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { loginUser, registerUser } from "../../firebase/auth";
 import sprite from "../../images/sprite.svg";
@@ -46,6 +47,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleShowPassword = () => {
@@ -59,7 +62,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
     try {
       if (login) {
         await dispatch(
-          loginUser({ email: values.email, password: values.password })
+          loginUser({
+            email: values.email,
+            password: values.password,
+          })
         );
       }
       if (registration) {
@@ -67,21 +73,21 @@ const AuthForm: React.FC<AuthFormProps> = ({
           registerUser({
             email: values.email,
             password: values.password,
+            name: values.name,
           })
         );
       }
+
       actions.setSubmitting(false);
       handleCloseModal();
-      toast.success(
-        login ? "Login user seccessfully" : "registration user seccessfully",
-        {
-          duration: 4000,
-          position: "top-right",
-        }
-      );
+      navigate("/nannies");
+      toast.success("registration user seccessfully", {
+        duration: 4000,
+        position: "top-right",
+      });
     } catch (error) {
       actions.setSubmitting(false);
-      toast.success(login ? "Login user error" : "registration user error", {
+      toast.error(login ? "Login user error" : "registration user error", {
         duration: 4000,
         position: "top-right",
       });
