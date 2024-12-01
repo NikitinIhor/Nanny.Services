@@ -72,8 +72,7 @@ const ContactForm: React.FC<ContactFormProps> = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleSubmit = (values: formValues, actions: any) => {
-    values = initialValues;
+  const handleSubmit = (_: formValues, actions: any) => {
     actions.resetForm();
     navigate("/");
     toast.success("Contact form has been seccessfully sent", {
