@@ -11,12 +11,30 @@ const HomePage: React.FC = () => {
   const [activeModal, setActiveModal] = useState<
     "login" | "registration" | null
   >(null);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 500);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const increment = 20;
+    const target = 15000;
+    const second = 1;
+
+    const timer = setInterval(() => {
+      setTotal((prev) => {
+        if (prev + increment >= target) {
+          clearInterval(timer);
+          return target;
+        }
+        return prev + increment;
+      });
+    }, second);
+    return () => clearInterval(timer);
   }, []);
 
   const handleOpenModal = (type: "login" | "registration") => {
@@ -27,6 +45,8 @@ const HomePage: React.FC = () => {
     setOpenModal(false);
     setActiveModal(null);
   };
+
+  const addComa = (value: number) => value.toLocaleString("en-US");
 
   return (
     <div className={`${css.wrapper} ${isVisible ? css.visible : ""}`}>
@@ -81,7 +101,7 @@ const HomePage: React.FC = () => {
               </div>
               <div className={css.right_content}>
                 <p>Experienced nannies</p>
-                <span>15,000</span>
+                <span>{addComa(total)}</span>
               </div>
             </div>
           </div>

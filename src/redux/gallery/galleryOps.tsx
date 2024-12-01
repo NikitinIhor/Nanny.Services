@@ -16,3 +16,17 @@ export const getAllGallery = createAsyncThunk(
     }
   }
 );
+
+export const filterGallery = createAsyncThunk(
+  "gallery/filter",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get(
+        "https://nannyservices-9f324-default-rtdb.europe-west1.firebasedatabase.app/babysitters.json"
+      );
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);

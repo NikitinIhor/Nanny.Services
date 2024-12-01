@@ -1,5 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import sprite from "../../images/sprite.svg";
 import css from "./ContactForm.module.css";
@@ -38,8 +40,8 @@ const FeedbackSchema = Yup.object().shape({
     )
     .required("phone is required!"),
   age: Yup.number()
-    .min(18, "Age must be at least 18!")
-    .max(99, "Age must be less than 99!")
+    .min(0, "Age must be at least 0!")
+    .max(16, "Age must be less than 16!")
     .required("Age is required!"),
   email: Yup.string()
     .email("Must be a valid email!")
@@ -59,6 +61,7 @@ const meetingList = ["09 : 00", "09 : 30", "10 : 00", "10 : 30"];
 const ContactForm: React.FC<ContactFormProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("00 : 00");
+  const navigate = useNavigate();
 
   const handleChangeValue = (newValue: string) => {
     setValue(newValue);
@@ -69,9 +72,14 @@ const ContactForm: React.FC<ContactFormProps> = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleSubmit = (_: formValues, actions: any) => {
-    // _ ===values
+  const handleSubmit = (values: formValues, actions: any) => {
+    values = initialValues;
     actions.resetForm();
+    navigate("/");
+    toast.success("Contact form has been seccessfully sent", {
+      duration: 4000,
+      position: "top-right",
+    });
   };
 
   return (

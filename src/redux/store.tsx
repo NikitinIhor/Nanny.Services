@@ -3,12 +3,13 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/authSlice";
+import filterReducer from "./filter/filterSlice";
 import galleryReducer from "./gallery/gallerySlise";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["gallery", "auth"],
+  whitelist: ["gallery", "auth", "filter"],
 };
 
 const persistedReducer = persistReducer(persistConfig, galleryReducer);
@@ -17,6 +18,7 @@ export const store = configureStore({
   reducer: {
     gallery: persistedReducer,
     auth: authReducer,
+    filter: filterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

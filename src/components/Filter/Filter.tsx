@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import sprite from "../../images/sprite.svg";
+import { changeFilter } from "../../redux/filter/filterSlice";
 import css from "./Filter.module.css";
+
+interface FilterItem {
+  id: number;
+  name: string;
+  checked: boolean;
+}
 
 interface FilterProps {}
 
-const filterList = [
+const filterList: FilterItem[] = [
   { id: 1, name: "A to Z", checked: true },
   { id: 2, name: "Z to A", checked: false },
   { id: 3, name: "Less than 10$", checked: false },
@@ -15,6 +23,7 @@ const filterList = [
 ];
 
 const Filter: React.FC<FilterProps> = () => {
+  const dispatch = useDispatch();
   const [filter, setfilter] = useState(filterList);
   const [show, setShow] = useState(false);
 
@@ -22,13 +31,23 @@ const Filter: React.FC<FilterProps> = () => {
     setShow((prev) => !prev);
   };
 
-  const handleFilter = (id: number) => {
-    const updateFilter = filter.map((el) =>
-      el.id === id ? { ...el, checked: true } : { ...el, checked: false }
-    );
-    setShow(false);
-    setfilter(updateFilter);
-  };
+  const handleFilter = useCallback(
+    (id: number) => {
+      const updateFilter = filter.map((el) =>
+        el.id === id ? { ...el, checked: true } : { ...el, checked: false }
+      );
+
+      setfilter(updateFilter);
+
+      const selectedFilter = updateFilter.find((el) => el.id === id);
+      if (selectedFilter?.name) {
+        dispatch(changeFilter({ sortBy: selectedFilter.name }));
+      }
+
+      setShow(false);
+    },
+    [filter, dispatch]
+  );
 
   return (
     <div className={css.container}>
